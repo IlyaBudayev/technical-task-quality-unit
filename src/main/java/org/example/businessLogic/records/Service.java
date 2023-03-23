@@ -14,6 +14,7 @@ public record Service(String service, String questionType, String response, Loca
     // Defines a record class Service with five fields: service, questionType, response, date and time
     public Service {
 
+        // split the service string into parts (e.g. "1.2" -> ["1", "2"])
         String[] serviceParts = service.split("\\.");
         String serviceVar = serviceParts[0];
         int serviceInt = Integer.parseInt(serviceVar);
@@ -22,7 +23,7 @@ public record Service(String service, String questionType, String response, Loca
         validateInputValue(serviceInt, MIN_VALUE, MAX_SERVICE, "Service"); // Service
 
 
-        validateInputValueForNullable(serviceVariation, MAX_SERVICE_VARIATION, "Service Variation");
+        validateInputValueForNullable(serviceVariation, MAX_SERVICE_VARIATION, "Service Variation");// Service Variation
 
 
         String[] questionPart = questionType.split("\\.");
@@ -44,6 +45,7 @@ public record Service(String service, String questionType, String response, Loca
                         validateInputValue(serviceVariationInt, Service.MIN_VALUE, maxServiceVariation, serviceVariation1));
     }
 
+    //Validate to ensure that the line is according to number limit
     private static void validateInputValue(int inputNumber, int min, int max, String instance) {
         if (inputNumber < min || inputNumber > max) {
             throw new IllegalArgumentException(instance + " must be in range from " + min + " to " + max + ". Value: \"" + inputNumber + "\" is incorrect");
